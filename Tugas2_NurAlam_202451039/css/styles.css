@@ -1,0 +1,390 @@
+/* =========================================================
+   Portal Layanan Akademik – styles.css
+   Pendekatan: mobile-first (mulai 1 kolom, melebar dengan min-width)
+   ========================================================= */
+
+:root {
+  --plum: #4a1631;       /* berry gelap: header, judul, footer */
+  --plum-2: #6b1f45;     /* berry: ujung gradasi header & footer */
+  --pink: #a3245a;       /* rose pink: tombol, link, label kecil */
+  --pink-tua: #861c49;   /* rose lebih gelap: hover tombol */
+  --pink-muda: #fbe8f0;  /* pink lembut: pilihan radio aktif */
+  --magenta: #a8323e;    /* aksen: tanda wajib, garis panel jam */
+  --fokus: #6e1f47;      /* garis fokus keyboard di latar terang */
+  --fokus-gelap: #f5c26b; /* garis fokus keyboard di latar gelap */
+  --kertas: #ffffff;
+  --latar: #f7eef2;      /* blush pink muda: latar halaman */
+  --teks: #2a1520;
+  --teks-pudar: #6a4a58;
+  --garis: #ead6df;
+
+  --font: "Plus Jakarta Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  --radius: 10px;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4.5rem;
+}
+
+/* ---------- Reset dasar & box model ---------- */
+html { scroll-padding-top: 6rem; } /* judul tidak tertutup nav sticky saat klik link */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  overflow-wrap: anywhere;      /* teks/email sangat panjang tidak bikin overflow */
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--teks);
+  background: var(--latar);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 { line-height: 1.15; color: var(--plum); margin: 0 0 var(--space-2); }
+h1 { font-size: clamp(2.1rem, 1.3rem + 3.6vw, 3.75rem); font-weight: 800; letter-spacing: -0.035em; }
+h2 { font-size: clamp(1.7rem, 1.3rem + 1.6vw, 2.5rem); font-weight: 800; letter-spacing: -0.03em; }
+h3 { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.01em; }
+p { margin: 0 0 var(--space-2); }
+
+a { color: var(--pink); }
+a:hover { color: var(--pink-tua); }
+
+/* Label kecil di atas judul (bukan heading, hanya keterangan) */
+.eyebrow {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pink);
+}
+
+/* Lebar konten dibatasi agar baris teks tidak terlalu panjang */
+.wrap {
+  width: 100%;
+  max-width: 76rem;
+  margin-inline: auto;
+  padding-inline: var(--space-2);
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  background: linear-gradient(110deg, var(--plum-2), var(--plum) 60%);
+  color: #fff;
+}
+.header-inner { padding-block: var(--space-2); }
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: #fff;
+  text-decoration: none;
+}
+.brand:hover { color: #fff; }
+.brand-logo { width: 3rem; height: 3rem; flex-shrink: 0; object-fit: contain; }
+.brand-text { display: flex; flex-direction: column; }
+.brand-name { font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em; }
+.brand-unit { font-size: 0.9rem; color: #f0d0de; }
+
+/* ---------- Navigasi ---------- */
+.site-nav {
+  background: var(--kertas);
+  border-bottom: 1px solid var(--garis);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.nav-list {
+  list-style: none;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;            /* menu turun ke baris baru di layar sempit, tidak overflow */
+  gap: 0.25rem 0.75rem;
+  padding-block: 0.6rem;
+}
+.nav-list a {
+  display: inline-block;
+  padding: 0.5rem 0.5rem;     /* area sentuh cukup besar */
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--plum);
+  border-radius: 8px;
+}
+.nav-list a:hover { background: var(--pink-muda); }
+
+/* ---------- Tombol (satu gaya saja) ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  font: inherit;
+  font-weight: 700;
+  color: #fff;
+  background: var(--pink);
+  border: 0;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: var(--pink-tua); color: #fff; }
+.btn-block { display: block; width: 100%; }
+
+/* ---------- Intro ---------- */
+.intro { padding-block: var(--space-4) var(--space-5); background: var(--kertas); }
+.intro-grid { display: grid; gap: var(--space-4); }
+.lead { font-size: 1.1rem; color: var(--teks-pudar); max-width: 40rem; margin-bottom: var(--space-3); }
+
+/* Panel jam layanan dibuat seperti karcis loket */
+.loket {
+  background: var(--kertas);
+  border: 1px dashed var(--garis);
+  border-left: 5px solid var(--magenta);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  box-shadow: 0 1px 0 var(--garis);
+}
+.loket h2 { font-size: 1.35rem; font-weight: 500; letter-spacing: 0; }
+.loket dl { margin: 0; display: grid; }
+.loket dl div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 1rem;
+  padding-block: 0.65rem;
+  border-bottom: 1px solid var(--garis);
+}
+.loket dl div:last-child { border-bottom: 0; }
+.loket dt { color: var(--teks-pudar); }
+.loket dd { margin: 0; font-weight: 700; }
+
+/* ---------- Bagian umum ---------- */
+.layanan, .alur, .permohonan { padding-block: var(--space-5); }
+.layanan { background: linear-gradient(180deg, var(--latar), #fbf6f8); }
+.section-desc { color: var(--teks-pudar); }
+
+/* ---------- Kartu layanan (Grid) ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;   /* mobile: 1 kolom */
+  gap: var(--space-3);
+  margin-top: var(--space-3);
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--kertas);
+  border: 1px solid var(--garis);
+  border-top: 4px solid var(--plum);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+.card-desc { color: var(--teks-pudar); font-size: 0.95rem; }
+.card-meta {
+  font-size: 0.95rem;
+  color: var(--teks-pudar);
+  padding-block: 0.75rem;
+  border-block: 1px solid var(--garis);
+}
+.card-meta strong { color: var(--teks); }
+.card-syarat { margin-bottom: 0.25rem; }
+.card ul { list-style: none; margin: 0 0 var(--space-3); padding-left: 1.25rem; color: var(--teks-pudar); font-size: 0.95rem; }
+.card-link { margin-top: auto; font-weight: 600; text-underline-offset: 4px; }   /* link selalu di bawah kartu */
+
+/* ---------- Alur (urutan langkah, jadi pakai <ol>) ---------- */
+.alur { background: var(--kertas); }
+.steps {
+  list-style: none;
+  counter-reset: langkah;
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.steps li {
+  counter-increment: langkah;
+  position: relative;
+  padding-left: 3.75rem;
+}
+.steps li::before {
+  content: counter(langkah);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--plum);
+  color: #fff;
+  font-weight: 800;
+}
+.steps h3 { margin-bottom: 0.25rem; }
+.steps p { color: var(--teks-pudar); margin: 0; font-size: 0.95rem; }
+
+/* ---------- Form ---------- */
+.form-wrap { max-width: 50rem; }
+.form-head { text-align: center; margin-bottom: var(--space-3); }
+.form {
+  background: var(--kertas);
+  border: 1px solid var(--garis);
+  border-top: 4px solid var(--plum);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--space-4);
+  min-width: 0;              /* mencegah fieldset melebar & bikin overflow */
+}
+legend {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--plum);
+  padding: 0;
+  margin-bottom: var(--space-2);
+}
+.field-grid { display: grid; gap: 0 var(--space-3); }
+.field { margin-bottom: var(--space-2); }
+.field label { display: block; font-weight: 500; margin-bottom: 0.3rem; }
+label span[aria-hidden], legend span[aria-hidden] { color: var(--magenta); }
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.6rem 0.85rem;
+  font: inherit;
+  color: var(--teks);
+  background: #fff;
+  border: 1.5px solid #a8808f;   /* kontras batas input ≥ 3:1 */
+  border-radius: 8px;
+}
+textarea { resize: vertical; }
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline-offset: 1px;
+  border-color: var(--pink);
+}
+
+.hint { font-size: 0.85rem; color: var(--teks-pudar); margin: 0 0 0.4rem; }
+
+.radio-group { display: grid; gap: 0.6rem; }
+.radio, .check {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1.5px solid var(--garis);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+}
+.radio:has(input:checked) { border-color: var(--pink); background: var(--pink-muda); }
+.radio input, .check input {
+  width: 1.2rem;
+  height: 1.2rem;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--pink);
+}
+.radio label, .check label { cursor: pointer; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: linear-gradient(110deg, var(--plum), var(--plum-2));
+  color: #f0d0de;
+  padding-block: var(--space-4);
+}
+.site-footer h2 { color: #fff; font-size: 1.2rem; letter-spacing: -0.01em; margin-bottom: 0.5rem; }
+.site-footer address { font-style: normal; }
+.site-footer a { color: #fff; }
+.footer-grid { display: grid; gap: var(--space-3); }
+.copy { font-size: 0.85rem; margin: 0; color: #f0d0de; }
+
+
+/* =========================================================
+   BREAKPOINT
+   Dipilih berdasarkan kapan konten mulai terlalu renggang,
+   bukan berdasarkan nama perangkat.
+   ========================================================= */
+
+/* ~600px: kartu & isian form sudah muat 2 kolom tanpa teks terlalu sempit */
+@media (min-width: 37.5em) {
+  .card-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .field-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ~900px: intro bisa dibagi dua (teks + panel jam layanan) */
+@media (min-width: 56.25em) {
+  .wrap { padding-inline: var(--space-4); }
+  .intro { padding-block: var(--space-5); }
+  .intro-grid { grid-template-columns: 1.6fr 1fr; align-items: center; }
+  .steps { grid-template-columns: repeat(4, 1fr); }
+  .footer-grid { grid-template-columns: 1fr auto; align-items: end; }
+  .copy { text-align: right; }
+  .form { padding: var(--space-4); }
+}
+
+/* ~1100px: 4 kartu sejajar dalam 1 baris */
+@media (min-width: 68.75em) {
+  .card-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Hormati pengguna yang mematikan animasi */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* ---------- Aksesibilitas ---------- */
+:focus-visible {
+  outline: 3px solid var(--fokus);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.site-header :focus-visible,
+.site-footer :focus-visible { outline-color: var(--fokus-gelap); }
+
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: -4rem;
+  z-index: 10;
+  padding: var(--space-1) var(--space-2);
+  background: var(--kertas);
+  color: var(--plum);
+  font-weight: 700;
+  border-radius: var(--radius);
+}
+.skip-link:focus { top: var(--space-1); }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Validasi HTML: tampilkan merah hanya setelah pengguna mengisi (bukan saat halaman dibuka) */
+input:user-invalid,
+textarea:user-invalid { border-color: #b42318; background: #fff6f5; }
+/* Pesan error berupa TEKS + ikon, bukan hanya warna merah.
+   Disembunyikan dulu, baru tampil setelah input diisi dengan salah. */
+.error {
+  display: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #b42318;              /* kontras ±6:1 di putih */
+  margin: 0.35rem 0 0;
+}
+input:user-invalid + .error,
+textarea:user-invalid + .error { display: block; }
